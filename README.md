@@ -28,6 +28,9 @@ http://hub.meefik.ru/rootfs/ubuntu-lxde_arm64.tgz
 kali:
 http://hub.meefik.ru/rootfs/kali_arm64.tgz
 ------------------------------------------------------------------------
+kalitop10:
+http://hub.meefik.ru/rootfs/kalitop10_arm64.tgz
+------------------------------------------------------------------------
 archlinux:
 http://hub.meefik.ru/rootfs/archlinux_arm64.tgz
 ------------------------------------------------------------------------
