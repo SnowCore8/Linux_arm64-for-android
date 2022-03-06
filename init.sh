@@ -5,7 +5,7 @@ export HOME=/root
 export TERM=linux
 
 clear
-apt-get update&&apt-get updagrade
+apt-get update&&apt-get upgrade
 apt-get install language-pack-zh-han* -y
 apt-get install language-pack-kde-zh-han* -y
 apt-get install language-pack-gnome-zh-han* -y
