@@ -2,36 +2,18 @@
 linux=/data/linux/linux
 
 clear
-./mount.sh
-
-clear
 [ ! -d $linux/dev ] && mkdir -p $linux/dev
+[ ! -d $linux/dev/shm ] && mkdir -p $linux/dev/shm
 [ ! -d $linux/dev/pts ] && mkdir -p $linux/dev/pts
 [ ! -d $linux/proc ] && mkdir -p $linux/proc
 [ ! -d $linux/sys ] && mkdir -p $linux/sys
 
 clear
-echo "
-LANG="zh_CN.UTF-8"
-LANGUAGE="zh_CN:zh"
-LC_NUMERIC="zh_CN"
-LC_TIME="zh_CN"
-LC_MONETARY="zh_CN"
-LC_PAPER="zh_CN"
-LC_NAME="zh_CN"
-LC_ADDRESS="zh_CN"
-LC_TELEPHONE="zh_CN"
-LC_MEASUREMENT="zh_CN"
-LC_IDENTIFICATION="zh_CN"
-LC_ALL="zh_CN.UTF-8"
-" >$linux/etc/default/locale
-echo "LANG=zh_CN.UTF-8" >$linux/etc/locale.conf
-echo "127.0.0.1	localhost" >$linux/etc/hosts
-echo "
-nameserver 114.114.114.114
-nameserver 8.8.8.8
-nameserver 8.8.4.4
-" >$linux/etc/resolv.conf
+./mount.sh
+
+clear
+cp /etc/hosts $linux/etc/hosts
+cp /etc/resolv.conf $linux/etc/resolv.conf
 
 clear
 cp init.sh $linux/boot/init.sh
