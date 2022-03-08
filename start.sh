@@ -18,7 +18,6 @@ export HOME=/root
 export TERM=linux
 apt-get update && apt-get upgrade && apt-get clean
 apt-get install language-pack-zh-hans  language-pack-zh-hans-base -y
-apt-get install xfonts-intl-chinese ttf-wqy-microhei ttf-wqy-zenhei  xfonts-wqy -y
 export LANG="zh_CN.UTF-8"
 export LANGUAGE="zh_CN:zh"
 export LC_MONETARY="zh_CN"
@@ -37,15 +36,12 @@ clear&&clear
 service ssh stop
 exit
 " >linux/boot/init.sh
+chown root:root $linux/boot/init.sh
+chmod 777 $linux/boot/init.sh
 
 clear
 cp /etc/hosts $linux/etc/hosts
 cp /etc/resolv.conf $linux/etc/resolv.conf
-
-clear
-cp init.sh $linux/boot/init.sh
-chown root:root $linux/boot/init.sh
-chmod 777 $linux/boot/init.sh
 
 clear
 chroot $linux /boot/init.sh
