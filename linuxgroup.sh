@@ -108,23 +108,41 @@ device_tools(){
     fi
 }
 
+
+# udev on /dev type devtmpfs (rw,nosuid,relatime,size=423624k,nr_inodes=105906,mode=755,inode64)
+# devpts on /dev/pts type devpts (rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000)
+# tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev,inode64)
+# sysfs on /sys type sysfs (rw,nosuid,nodev,noexec,relatime)
+# proc on /proc type proc (rw,nosuid,nodev,noexec,relatime)
+# tmpfs on /run type tmpfs (rw,nosuid,nodev,noexec,relatime,size=91608k,mode=755,inode64)
+# tmpfs on /run/lock type tmpfs (rw,nosuid,nodev,noexec,relatime,size=5120k,inode64)
+# cgroup2 on /sys/fs/cgroup type cgroup2 (rw,nosuid,nodev,noexec,relatime,nsdelegate,memory_recursiveprot)
+# pstore on /sys/fs/pstore type pstore (rw,nosuid,nodev,noexec,relatime)
+# bpf on /sys/fs/bpf type bpf (rw,nosuid,nodev,noexec,relatime,mode=700)
+
 group_tools(){
     if [[ "$1" == "mount" ]] ;then
         echo -e "\033[32m - $(date +%Y年%m月%d日%H时%M分%S秒) 分区表挂载\033[0m"
         [[ ! -d "$rootfs/dev" ]] && mkdir -p $rootfs/dev
-        mount --bind /dev $rootfs/dev 2>/dev/null                  || echo -e "\033[33m - $(date +%Y年%m月%d日%H时%M分%S秒) [$rootfs/dev] 挂载失败 !!!\033[0m"
+        mount /dev $rootfs/dev --bind -o rw,nosuid,relatime,size=423624k,nr_inodes=105906,mode=755,inode64 2>/dev/null                      || echo -e "\033[33m - $(date +%Y年%m月%d日%H时%M分%S秒) [$rootfs/dev] 挂载失败 !!!\033[0m"
         [[ ! -d "$rootfs/dev/pts" ]] && mkdir -p $rootfs/dev/pts
-        mount --bind /dev/pts $rootfs/dev/pts 2>/dev/null          || echo -e "\033[33m - $(date +%Y年%m月%d日%H时%M分%S秒) [$rootfs/dev/pts] 挂载失败 !!!\033[0m"
+        mount devpts $rootfs/dev/pts -t devpts -o rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000 2>/dev/null                         || echo -e "\033[33m - $(date +%Y年%m月%d日%H时%M分%S秒) [$rootfs/dev/pts] 挂载失败 !!!\033[0m"
         [[ ! -d "$rootfs/dev/shm" ]] && mkdir -p $rootfs/dev/shm
-        mount -t tmpfs tmpfs $rootfs/dev/shm 2>/dev/null           || echo -e "\033[33m - $(date +%Y年%m月%d日%H时%M分%S秒) [$rootfs/dev/shm] 挂载失败 !!!\033[0m"
+        mount tmpfs $rootfs/dev/shm -t tmpfs -o rw,nosuid,nodev,inode64 2>/dev/null                                                         || echo -e "\033[33m - $(date +%Y年%m月%d日%H时%M分%S秒) [$rootfs/dev/shm] 挂载失败 !!!\033[0m"
         [[ ! -d "$rootfs/proc" ]] && mkdir -p $rootfs/proc
-        mount --bind /proc $rootfs/proc 2>/dev/null                || echo -e "\033[33m - $(date +%Y年%m月%d日%H时%M分%S秒) [$rootfs/proc] 挂载失败 !!!\033[0m"
+        mount proc $rootfs/proc -t proc -o rw,nosuid,nodev,noexec,relatime 2>/dev/null                                                      || echo -e "\033[33m - $(date +%Y年%m月%d日%H时%M分%S秒) [$rootfs/proc] 挂载失败 !!!\033[0m"
         [[ ! -d "$rootfs/sys" ]] && mkdir -p $rootfs/sys
-        mount --bind /sys $rootfs/sys 2>/dev/null                  || echo -e "\033[33m - $(date +%Y年%m月%d日%H时%M分%S秒) [$rootfs/sys] 挂载失败 !!!\033[0m"
+        mount sysfs $rootfs/sys -t sysfs -o rw,nosuid,nodev,noexec,relatime 2>/dev/null                                                     || echo -e "\033[33m - $(date +%Y年%m月%d日%H时%M分%S秒) [$rootfs/sys] 挂载失败 !!!\033[0m"
+        [[ ! -d "$rootfs/sys/fs/cgroup" ]] && mkdir -p $rootfs/sys/fs/cgroup
+        mount cgroup2 $rootfs/sys/fs/cgroup -t cgroup2 -o rw,nosuid,nodev,noexec,relatime,nsdelegate,memory_recursiveprot 2>/dev/null       || echo -e "\033[33m - $(date +%Y年%m月%d日%H时%M分%S秒) [$rootfs/sys/fs/cgroup] 挂载失败 !!!\033[0m"
+        [[ ! -d "$rootfs/sys/fs/pstore" ]] && mkdir -p $rootfs/sys/fs/pstore
+        mount none $rootfs/sys/fs/pstore -t pstore -o rw,nosuid,nodev,noexec,relatime 2>/dev/null                                           || echo -e "\033[33m - $(date +%Y年%m月%d日%H时%M分%S秒) [$rootfs/sys/fs/pstore] 挂载失败 !!!\033[0m"
+        [[ ! -d "$rootfs/sys/fs/bpf" ]] && mkdir -p $rootfs/sys/fs/bpf
+        mount bpf $rootfs/sys/fs/bpf -t bpf -o rw,nosuid,nodev,noexec,relatime,mode=700 2>/dev/null                                         || echo -e "\033[33m - $(date +%Y年%m月%d日%H时%M分%S秒) [$rootfs/sys/fs/bpf] 挂载失败 !!!\033[0m"
         [[ ! -d "$rootfs/run" ]] && mkdir -p $rootfs/run
-        mount -t tmpfs tmpfs $rootfs/run 2>/dev/null               || echo -e "\033[33m - $(date +%Y年%m月%d日%H时%M分%S秒) [$rootfs/run] 挂载失败 !!!\033[0m"
+        mount tmpfs $rootfs/run -t tmpfs -o rw,nosuid,nodev,noexec,relatime,size=91608k,mode=755,inode64 2>/dev/null                        || echo -e "\033[33m - $(date +%Y年%m月%d日%H时%M分%S秒) [$rootfs/run] 挂载失败 !!!\033[0m"
         [[ ! -d "$rootfs/run/lock" ]] && mkdir -p $rootfs/run/lock
-        mount -t tmpfs tmpfs $rootfs/run/lock 2>/dev/null          || echo -e "\033[33m - $(date +%Y年%m月%d日%H时%M分%S秒) [$rootfs/run/lock] 挂载失败 !!!\033[0m"
+        mount tmpfs $rootfs/run/lock -t tmpfs -o rw,nosuid,nodev,noexec,relatime,size=5120k,inode64 2>/dev/null                             || echo -e "\033[33m - $(date +%Y年%m月%d日%H时%M分%S秒) [$rootfs/run/lock] 挂载失败 !!!\033[0m"
         # [[ ! -d "$rootfs/sdcard" ]] && mkdir -p $rootfs/sdcard
         # [[ ! -d "/data/media/0/linux" ]] && mkdir -p /data/media/0/linux
         # mount --bind /data/media/0/linux $rootfs/sdcard 2>/dev/null    || echo -e "\033[33m - $(date +%Y年%m月%d日%H时%M分%S秒) [$rootfs/sdcard] 挂载失败 !!!\033[0m"
@@ -223,7 +241,7 @@ group_tools mount
 [[ ! -d "$rootfs/boot" ]]&&mkdir -p $rootfs/boot
 echo "\
 #!/usr/bin/bash
-PATH=/usr/bin:/usr/sbin:$PATH
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games:/snap/bin:$PATH"
 LANG="zh_CN.UTF-8"
 LANGUAGE="zh_CN:zh"
 [[ ! -h "/run/shm" ]] && ln -sf /dev/shm /run/shm
@@ -238,7 +256,7 @@ service ssh restart
 chown root:shell $rootfs/etc/profile.d/init.sh
 chmod 777 $rootfs/etc/profile.d/init.sh
 echo '#!/usr/bin/bash
-PATH=/usr/bin:/usr/sbin:$PATH
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/games:/usr/games:/snap/bin:$PATH"
 LANG="zh_CN.UTF-8"
 LANGUAGE="zh_CN:zh"
 for rc in $(find /etc/init.d -type f);do
