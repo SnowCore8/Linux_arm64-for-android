@@ -1,10 +1,11 @@
-新脚本: linuxgroup.sh
-需要自备 linux-rootfs.tar.gz 放置于脚本同目录直接运行可进行安装
+## 新脚本: linuxgroup.sh
+* 需要自备 linux-rootfs.tar.gz 放置于脚本同目录直接运行可进行安装
 * 跳转终端: ./linuxgroup.sh --group /data/linux(这是目标地址，可自选)
 * 远程登录ssh: ./linuxgroup.sh --service /data/linux(这是目标地址，可自选)
 * 在rootfs根目录创建 reload 文件即可进行重装，注意备份数据！
 
-旧脚本 start.sh mount.sh umount.sh
+-----
+## 旧脚本 start.sh mount.sh umount.sh
 使用工具前请给予工具全部权限
 将本工具移动到/data/linux目录下
 然后将你的虚拟机解压到/data/linux/linux文件夹内
