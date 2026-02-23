@@ -1,5 +1,5 @@
 ## 新脚本: linuxgroup.sh
-* 需要自备 linux-rootfs.tar.gz 放置于脚本同目录直接运行可进行安装
+* 需要自备 linux-rootfs.tar.gz(可直接使用ubuntu-base rootfs) 放置于脚本同目录直接运行可进行安装
 * 跳转终端: ./linuxgroup.sh --group /data/linux(这是目标地址，可自选)
 * 远程登录ssh: ./linuxgroup.sh --service /data/linux(这是目标地址，可自选)
 * 在rootfs根目录创建 reload 文件即可进行重装，注意备份数据！
@@ -15,7 +15,6 @@
 这是链接ssh所必要的设置
 如果前面工具造成所有ssh端口无法连接，请重启系统
 centos无法启用ssh但可以执行命令使用终端链接
-我在这里提供一些Linuxdeploy的Linux_arm64虚拟机链接.
 
 警告!!!
 如果你想删除虚拟机，请检查虚拟机目录内的dev sys proc 是否已经正常卸载，否则造成的数据损失本人概不负责
@@ -30,7 +29,6 @@ Then enter the passwd root to set your password.
 This is the settings necessary for link SSH
 If the front tool causes all SSH ports that cannot be connected, please restart the system
 CentOS cannot enable SSH but can be executed using a terminal link
-I have some LinuxDeploy Linux_arm64 virtual machine link here.
 
 warn!!!
 If you want to delete a virtual machine, check if the dev sys proc in the virtual machine directory has been uninstalled, otherwise the resulting data loss I am not responsible.
