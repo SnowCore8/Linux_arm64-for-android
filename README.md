@@ -14,7 +14,7 @@
 然后输入passwd root设置你的密码
 这是链接ssh所必要的设置
 如果前面工具造成所有ssh端口无法连接，请重启系统
-centos无法启用ssh但可以执行命令使用终端链接
+centos无法启用ssh但可以执行命令使用终端登录
 
 警告!!!
 如果你想删除虚拟机，请检查虚拟机目录内的dev sys proc 是否已经正常卸载，否则造成的数据损失本人概不负责
@@ -28,7 +28,7 @@ Command: ./start.sh
 Then enter the passwd root to set your password.
 This is the settings necessary for link SSH
 If the front tool causes all SSH ports that cannot be connected, please restart the system
-CentOS cannot enable SSH but can be executed using a terminal link
+CentOS cannot enable SSH but can be executed using a terminal login
 
 warn!!!
 If you want to delete a virtual machine, check if the dev sys proc in the virtual machine directory has been uninstalled, otherwise the resulting data loss I am not responsible.
