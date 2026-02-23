@@ -1,3 +1,10 @@
+新脚本: linuxgroup.sh
+需要自备 linux-rootfs.tar.gz 放置于脚本同目录直接运行可进行安装
+* 跳转终端: ./linuxgroup.sh --group /data/linux(这是目标地址，可自选)
+* 远程登录ssh: ./linuxgroup.sh --service /data/linux(这是目标地址，可自选)
+* 在rootfs根目录创建 reload 文件即可进行重装，注意备份数据！
+
+旧脚本 start.sh mount.sh umount.sh
 使用工具前请给予工具全部权限
 将本工具移动到/data/linux目录下
 然后将你的虚拟机解压到/data/linux/linux文件夹内
@@ -27,29 +34,3 @@ I have some LinuxDeploy Linux_arm64 virtual machine link here.
 warn!!!
 If you want to delete a virtual machine, check if the dev sys proc in the virtual machine directory has been uninstalled, otherwise the resulting data loss I am not responsible.
 After using ./start.sh, enter the exit command again to complete the normal uninstall (but not necessarily)
-
-------------------------------------------------------------------------
-centos7:
-http://hub.meefik.ru/rootfs/centos_arm64.tgz
-------------------------------------------------------------------------
-Ubuntu18.04:
-http://hub.meefik.ru/rootfs/ubuntu-lxde_arm64.tgz
-------------------------------------------------------------------------
-kali:
-http://hub.meefik.ru/rootfs/kali_arm64.tgz
-------------------------------------------------------------------------
-kalitop10:
-http://hub.meefik.ru/rootfs/kalitop10_arm64.tgz
-------------------------------------------------------------------------
-archlinux:
-http://hub.meefik.ru/rootfs/archlinux_arm64.tgz
-------------------------------------------------------------------------
-debian:
-http://hub.meefik.ru/rootfs/debian_arm64.tgz
-------------------------------------------------------------------------
-fedora:
-http://hub.meefik.ru/rootfs/fedora_arm64.tgz
-------------------------------------------------------------------------
-alpine:
-http://hub.meefik.ru/rootfs/alpine_arm64.tgz
-------------------------------------------------------------------------
